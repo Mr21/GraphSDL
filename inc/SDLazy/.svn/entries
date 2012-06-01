@@ -1,0 +1,91 @@
+10
+
+dir
+0
+svn+ssh://kscm@koala-rendus.epitech.net/207correl-2015-beaume_a/inc/SDLazy
+svn+ssh://kscm@koala-rendus.epitech.net/207correl-2015-beaume_a
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2bbd3308-3d6c-4a1c-bdc2-74f10f03fbb1
+
+SDLazy_Events.h
+file
+
+
+
+add
+
+list.h
+file
+
+
+
+add
+
+SDLazy_Anims.h
+file
+
+
+
+add
+
+SDLazy_CursorsAscii.h
+file
+
+
+
+add
+
+SDLazy_Surfaces.h
+file
+
+
+
+add
+
+SDLazy_Buttons.h
+file
+
+
+
+add
+
+SDLazy.h
+file
+
+
+
+add
+
+SDLazy_Cursors.h
+file
+
+
+
+add
+
+SDLazy_Circle.h
+file
+
+
+
+add
+

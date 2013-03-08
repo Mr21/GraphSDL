@@ -58,8 +58,7 @@ static void		_drawMine(Graph* g)
   drawLine(g,
 	   3.14, 1.0,
 	   9.20, 3.0,
-	   0xff0000,
-	   g->srf);
+	   0xff0000);
 }
 
 void			drawGraph(void)

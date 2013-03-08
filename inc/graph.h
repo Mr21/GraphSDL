@@ -40,7 +40,7 @@ void		drawLineW(SDL_Surface*, int x, Uint32 px, e_border);
 void		drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
 void		graph_draw_bar(Graph*, double x, double sz, Uint32 col);
 void		drawDot(Graph*, double x, double y, Uint32 col);
-void		drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col, SDL_Surface*);
+void		drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col);
 
 /* Events */
 void		eventQuit(SDL_Event*);

@@ -1,8 +1,8 @@
-#include			"graph.h"
+#include		"graph.h"
 
-void				drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
+void			drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
 {
-  int				x;
+  int			x;
 
   if (y >= 0 && y < srf->h)
     switch (style)
@@ -24,9 +24,9 @@ void				drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
       }
 }
 
-void				drawLineH(SDL_Surface *srf, int x, Uint32 px, e_border style)
+void			drawLineH(SDL_Surface *srf, int x, Uint32 px, e_border style)
 {
-  int				i;
+  int			i;
 
   if (x >= 0 && x < srf->w)
     switch (style)
@@ -88,11 +88,11 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
     }
 }
 
-void			drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col, SDL_Surface* srf)
+void			drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col)
 {
   _line(g->ori[X] + x1 * (g->unit_dist[X] / g->unit[X]),
 	g->ori[Y] + y1 * (g->unit_dist[Y] / -g->unit[Y]),
 	g->ori[X] + x2 * (g->unit_dist[X] / g->unit[X]),
 	g->ori[Y] + y2 * (g->unit_dist[Y] / -g->unit[Y]),
-	col, srf);
+	col, g->srf);
 }

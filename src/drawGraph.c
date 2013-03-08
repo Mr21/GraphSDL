@@ -53,6 +53,15 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
   SDL_FreeSurface(srf);
 }
 
+static void		_drawMine(Graph* g)
+{
+  drawLine(g,
+	   3.14, 1.0,
+	   9.20, 3.0,
+	   0xff0000,
+	   g->srf);
+}
+
 void			drawGraph(void)
 {
   Graph*		g = SDLazy_GetData();
@@ -68,7 +77,6 @@ void			drawGraph(void)
       drawLineH(g->srf, i, g->col[2], DOTTED);
     else
       _draw_unit_line(g, i, (d += g->unit[X]), 1);
-
   d = (y - g->ori[Y]) / g->unit_dist[Y] * -g->unit[Y];
   for (i = y, j = 1; (i += g->unit_dist[Y] / SUB_DIV) < g->srf->h; ++j)
     if (j % SUB_DIV)
@@ -82,4 +90,5 @@ void			drawGraph(void)
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
       g->ori[Y] += (g->drag_smooth[Y] /= DRAG_SMOOTH_SPEED);
     }
+  _drawMine(g);
 }

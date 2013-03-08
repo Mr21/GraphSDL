@@ -1,35 +1,29 @@
-#ifndef			SDLAZY_SURFACES_H_
-# define		SDLAZY_SURFACES_H_
+#ifndef			SDLAZY_SURFACES_H
+# define		SDLAZY_SURFACES_H
 
-# include		<SDL/SDL.h>
+# include		"SDLazy_ObjHeader.h"
+# include		"SDLazy_TinySprite.h"
+# include		"Math/myMath.h"
+# include		"CList.h"
 
 typedef			struct
 {
-  SDL_Surface*		src;
-  SDL_Rect		src_r;
+  SDLazy_ObjHeader	header;
+  SDLazy_TinySprite	tinySp;
+  char const*		path;
   Uint8			to_free;
-  char*			path;
 }			SDLazy_Surface;
 
 typedef			struct
 {
-  Uint32		nb_srfs;
-  SDLazy_Surface*	srfs;
+  CList			list;
 }			SDLazy_Surfaces;
 
-void			SDLazy_SurfaceLoad(Uint32 id, char* path, SDL_Rect* src_r);
-void			SDLazy_SurfacePack(Uint32 id, SDL_Surface* ptr, SDL_Rect* src_r);
-void			SDLazy_FreeSurfaces(SDLazy_Surfaces* s);
+void			SDLazy_InitSurfaces(SDLazy_Surfaces*);
+void			SDLazy_FreeSurfaces(SDLazy_Surfaces*);
 
-void			SDLazy_Blit(Uint32 id, SDL_Surface* dst, SDL_Rect* dst_r);
-void			SDLazy_BlitScreen(Uint32 id, SDL_Rect* dst_r);
+SDLazy_Surface*		SDLazy_SurfaceLoad(char const* path, SDL_Rect* src_r);
+SDLazy_Surface*		SDLazy_SurfacePack(SDL_Surface* ptr, SDL_Rect* src_r);
+void			SDLazy_FreeSurface(SDLazy_Surface*);
 
-/* Getters */
-SDLazy_Surface*		SDLazy_GetSurface(Uint32 id);
-int			SDLazy_GetSurfaceW(Uint32 id);
-int			SDLazy_GetSurfaceH(Uint32 id);
-SDL_Surface*		SDLazy_GetScreen(void);
-int			SDLazy_GetScreenW(void);
-int			SDLazy_GetScreenH(void);
-
-#endif			/* !SDLAZY_SURFACES_H_ */
+#endif

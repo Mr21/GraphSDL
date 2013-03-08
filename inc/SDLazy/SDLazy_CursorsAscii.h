@@ -1,5 +1,5 @@
-#ifndef			SDLAZY_CURSORSASCII_H
-# define		SDLAZY_CURSORSASCII_H
+#ifndef			SDLAZY_CURSORSASCII
+# define		SDLAZY_CURSORSASCII
 
 static const char*	cur_arrow[] =
   {
@@ -145,4 +145,40 @@ static const char*      cur_close_hand[] =
     "                                "
   };
 
-#endif			/* !SDLAZY_CURSORSASCII_H */
+static const char*	cur_cross[] =
+  {
+    "        XXX                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "XXXXXXXXX.XXXXXXXXX             ",
+    "X.................X             ",
+    "XXXXXXXXX.XXXXXXXXX             ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        X.X                     ",
+    "        XXX                     ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                "
+  };
+
+#endif

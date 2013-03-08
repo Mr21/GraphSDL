@@ -2,7 +2,8 @@
 # define		SDLAZY_ANIMS_H
 
 # include		"SDLazy_Surfaces.h"
-# include		"list.h"
+# include		"SDLazy_ObjHeader.h"
+# include		"CList.h"
 
 # define		TIMER_DEFAULT		50
 
@@ -15,52 +16,47 @@ typedef			enum
 
 typedef			struct
 {
-  SDLazy_Surface*	srf;
-  SDL_Rect		r_start;
+  SDLazy_ObjHeader	header;
+  SDLazy_TinySprite*	tinySp_tab;
   eAnimStatus		pause_or_stop;
   eAnimStatus		status;
-  int			x_rel;
-  int			nb_frames;
-  int			frame_curr;
-  int			frame_loop;
-  unsigned		ms_curr;
-  unsigned		ms_interval;
+  Uint16		nb_frames;
+  Uint16		frame_curr;
+  Uint16		frame_loop;
+  Uint16		ms_interval;
+  Uint32		ms_curr;
 }			SDLazy_Anim;
 
 typedef			struct
 {
-  unsigned		timer_default;
-  t_list		list;
+  Uint16		timer_default;
+  CList			list;
 }			SDLazy_Anims;
 
 /* AnimS */
 void			SDLazy_InitAnims(SDLazy_Anims*);
 void			SDLazy_FreeAnims(SDLazy_Anims*);
+void			SDLazy_AnimsUpdate(SDLazy_Anims*);
 
-SDLazy_Anim*		SDLazy_AnimCreate(unsigned srf, int nb_frames, int frame_loop, eAnimStatus status);
-void			SDLazy_FreeAnim(SDLazy_Anim*);
-
-/* Blit */
-void			SDLazy_AnimBlit(SDLazy_Anim*, SDL_Surface*, SDL_Rect*);
-void			SDLazy_AnimBlitScreen(SDLazy_Anim*, SDL_Rect*);
+SDLazy_Anim*		SDLazy_AnimCreate(SDLazy_Surface*, Uint16 nb_frames, Uint16 frame_loop, eAnimStatus status);
+void			SDLazy_AnimDestroy(SDLazy_Anim*);
 
 /* Controles */
 /*   Sur toutes les animations du programme */
 void			SDLazy_AnimsPlay(void);
 void			SDLazy_AnimsPause(void);
 void			SDLazy_AnimsStop(void);
+void			SDLazy_AnimsTimer(Uint16 ms);
 /*   Sur une animation en particuliere */
-void			SDLazy_AnimRewind(SDLazy_Anim*);
-void			SDLazy_AnimPlay(SDLazy_Anim*);
-void			SDLazy_AnimPause(SDLazy_Anim*);
-void			SDLazy_AnimStop(SDLazy_Anim*);
+void			SDLazy_AnimReplay(SDLazy_Anim*);
+int			SDLazy_AnimPlay(SDLazy_Anim*);
+int			SDLazy_AnimPause(SDLazy_Anim*);
+int			SDLazy_AnimStop(SDLazy_Anim*);
 
 /* Getters / Setters */
 eAnimStatus		SDLazy_AnimStatus(SDLazy_Anim*);
-void			SDLazy_AnimTimer(SDLazy_Anim*, unsigned ms);
-void			SDLazy_AnimsTimer(unsigned ms);
-void			SDLazy_AnimFrameLoop(SDLazy_Anim*, int frame);
-
-void			SDLazy_AnimsUpdate(SDLazy_Anims*);
+Uint16			SDLazy_AnimNbFrames(SDLazy_Anim*);
+void			SDLazy_AnimTimer(SDLazy_Anim*, Uint16 ms);
+void			SDLazy_AnimFrameLoop(SDLazy_Anim*, Uint16 frame);
 
 #endif

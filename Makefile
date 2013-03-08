@@ -1,22 +1,27 @@
 NAME		=	graph2d
 CC		=	gcc
-CFLAGS		=	-Wall -Wextra -pedantic
-CFLAGS		+=	-Iinc/
-LIB		=	-lSDL -lSDL_image -lSDL_ttf -lm lib/SDLazy.a
 RM		=	@rm -f
 
-SRC		=	src/main.c		\
-			src/initGraph.c		\
-			src/eventsGraph.c	\
-			src/drawGraph.c		\
-			src/drawLine.c		\
-			src/drawDot.c		\
-			src/zoomGraph.c		\
+CFLAGS		=	-Wall -Wextra -pedantic
+CFLAGS		+=	-Iinc/
 
-OBJ		=	$(SRC:.c=.o)
+LDFLAGS		=	-lm
+LDFLAGS		+=	-lSDL
+LDFLAGS		+=	-lSDL_image-1.2
+#LDFLAGS		+=	-lSDL_ttf-2.0
+LDFLAGS		+=	/usr/lib64/libSDL_ttf-2.0.so.0.10.1
+
+OBJ		=	src/SDLazy.o
+OBJ		+=	src/main.o
+OBJ		+=	src/initGraph.o
+OBJ		+=	src/eventsGraph.o
+OBJ		+=	src/drawGraph.o
+OBJ		+=	src/drawLine.o
+OBJ		+=	src/drawDot.o
+OBJ		+=	src/zoomGraph.o
 
 $(NAME)		:	$(OBJ)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+			$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 all		:	$(NAME)
 

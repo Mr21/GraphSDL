@@ -36,6 +36,9 @@ int		initGraph(Graph*, SDL_Surface*);
 void		drawGraph(void);
 void		zoomGraph(Graph*, int zoom);
 
+int		graph_XtoPixel(double x);
+int		graph_YtoPixel(double y);
+
 void		drawLineW(SDL_Surface*, int x, Uint32 px, e_border);
 void		drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
 void		graph_draw_bar(Graph*, double x, double sz, Uint32 col);

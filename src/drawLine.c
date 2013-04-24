@@ -90,9 +90,7 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
 
 void			drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col)
 {
-  _line(g->ori[X] + x1 * (g->unit_dist[X] / g->unit[X]),
-	g->ori[Y] + y1 * (g->unit_dist[Y] / -g->unit[Y]),
-	g->ori[X] + x2 * (g->unit_dist[X] / g->unit[X]),
-	g->ori[Y] + y2 * (g->unit_dist[Y] / -g->unit[Y]),
+  _line(graph_XtoPixel(x1), graph_YtoPixel(y1),
+	graph_XtoPixel(x2), graph_YtoPixel(y2),
 	col, g->srf);
 }

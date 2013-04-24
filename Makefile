@@ -13,6 +13,7 @@ LDFLAGS		+=	/usr/lib64/libSDL_ttf-2.0.so.0.10.1
 
 OBJ		=	src/SDLazy.o
 OBJ		+=	src/main.o
+OBJ		+=	src/graph_convertUnity.o
 OBJ		+=	src/initGraph.o
 OBJ		+=	src/eventsGraph.o
 OBJ		+=	src/drawGraph.o

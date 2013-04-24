@@ -72,6 +72,12 @@ static void		_case2(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf
 
 static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
 {
+  int			div = x2 - x1;
+  double		coefDir = div != 0;
+
+  if (coefDir)
+    coefDir = (y2 - y1) / div;
+
   if ((x2 - x1) >= (y2 - y1))
     {
       if (x2 < x1)

@@ -36,7 +36,7 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
       if (i < g->ori[Y] - 5 || i > g->ori[Y] + 5)
 	{
 	  ok = 1;
-	  drawLineW(g->srf, i, g->col[1], DASHED);
+	  graph_drawLineW(g->srf, i, g->col[1], DASHED);
 	  r.x = _pos_text(g, srf, wh);
 	  r.y = i - srf->h / 2;
 	}
@@ -44,7 +44,7 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
   else if (i < g->ori[X] - 5 || i > g->ori[X] + 5)
     {
       ok = 1;
-      drawLineH(g->srf, i, g->col[1], DASHED);
+      graph_drawLineH(g->srf, i, g->col[1], DASHED);
       r.x = i - srf->w / 2;
       r.y = _pos_text(g, srf, wh);
     }
@@ -55,13 +55,13 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
 
 static void		_drawMine(Graph* g)
 {
-  drawLine(g,
-	   3.14, 1.0,
-	   9.20, 3.0,
-	   0xff0000);
+  graph_drawLine(g,
+		 3.14, 1.0,
+		 9.20, 3.0,
+		 0xff0000);
 }
 
-void			drawGraph(void)
+void			graph_draw(void)
 {
   Graph*		g = SDLazy_GetData();
   double		x = fmod(g->ori[X], g->unit_dist[X]) - g->unit_dist[X];
@@ -73,17 +73,17 @@ void			drawGraph(void)
   d = (x - g->ori[X]) / g->unit_dist[X] * g->unit[X];
   for (i = x, j = 1; (i += g->unit_dist[X] / SUB_DIV) < g->srf->w; ++j)
     if (j % SUB_DIV)
-      drawLineH(g->srf, i, g->col[2], DOTTED);
+      graph_drawLineH(g->srf, i, g->col[2], DOTTED);
     else
       _draw_unit_line(g, i, (d += g->unit[X]), 1);
   d = (y - g->ori[Y]) / g->unit_dist[Y] * -g->unit[Y];
   for (i = y, j = 1; (i += g->unit_dist[Y] / SUB_DIV) < g->srf->h; ++j)
     if (j % SUB_DIV)
-      drawLineW(g->srf, i, g->col[2], DOTTED);
+      graph_drawLineW(g->srf, i, g->col[2], DOTTED);
     else
       _draw_unit_line(g, i, (d -= g->unit[Y]), 0);
-  drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
-  drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
+  graph_drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
+  graph_drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
   if (!graph_isDragging(g))
     {
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);

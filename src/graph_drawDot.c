@@ -1,6 +1,6 @@
 #include		"graph.h"
 
-void			drawDot(Graph* g, double x, double y, Uint32 col)
+void			graph_drawDot(Graph* g, double x, double y, Uint32 col)
 {
   int			_x, _y;
   int			i;

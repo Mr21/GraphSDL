@@ -32,28 +32,33 @@ typedef		struct
   int		nb_lines;
 }		Graph;
 
-int		initGraph(Graph*, SDL_Surface*);
-void		drawGraph(void);
+int		graph_init(Graph*, SDL_Surface*);
 
+/* Zoom */
 void		graph_zoomIn(Graph*);
 void		graph_zoomOut(Graph*);
+
+/* Drag */
 void		graph_dragOn(Graph*);
 void		graph_dragOff(Graph*);
 int		graph_isDragging(Graph const*);
+
+/* Unity */
 int		graph_XtoPixel(double x);
 int		graph_YtoPixel(double y);
 
-void		drawLineW(SDL_Surface*, int x, Uint32 px, e_border);
-void		drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
-void		graph_draw_bar(Graph*, double x, double sz, Uint32 col);
-void		drawDot(Graph*, double x, double y, Uint32 col);
-void		drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col);
+/* Draw */
+void		graph_draw(void);
+void		graph_drawDot(Graph*, double x, double y, Uint32 col);
+void		graph_drawLineW(SDL_Surface*, int x, Uint32 px, e_border);
+void		graph_drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
+void		graph_drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col);
 
 /* Events */
-void		graph_eventQuit(SDL_Event*);
-void		graph_eventKeyDown(SDL_Event*);
-void		graph_eventButtonDown(SDL_Event*);
-void		graph_eventButtonUp(SDL_Event*);
+void		graph_eventQuit       (SDL_Event*);
+void		graph_eventKeyDown    (SDL_Event*);
+void		graph_eventButtonDown (SDL_Event*);
+void		graph_eventButtonUp   (SDL_Event*);
 void		graph_eventMouseMotion(SDL_Event*);
 
 #endif

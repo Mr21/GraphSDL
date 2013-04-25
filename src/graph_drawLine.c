@@ -1,6 +1,6 @@
 #include		"graph.h"
 
-void			drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
+void			graph_drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
 {
   int			x;
 
@@ -24,7 +24,7 @@ void			drawLineW(SDL_Surface *srf, int y, Uint32 px, e_border style)
       }
 }
 
-void			drawLineH(SDL_Surface *srf, int x, Uint32 px, e_border style)
+void			graph_drawLineH(SDL_Surface *srf, int x, Uint32 px, e_border style)
 {
   int			i;
 
@@ -94,7 +94,7 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
     }
 }
 
-void			drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col)
+void			graph_drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col)
 {
   _line(graph_XtoPixel(x1), graph_YtoPixel(y1),
 	graph_XtoPixel(x2), graph_YtoPixel(y2),

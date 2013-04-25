@@ -12,14 +12,14 @@ LDFLAGS		+=	-lSDL_ttf
 
 OBJ		=	src/SDLazy.o
 OBJ		+=	src/main.o
+OBJ		+=	src/graph_init.o
 OBJ		+=	src/graph_events.o
-OBJ		+=	src/graph_convertUnity.o
+OBJ		+=	src/graph_unity.o
 OBJ		+=	src/graph_drag.o
-OBJ		+=	src/initGraph.o
-OBJ		+=	src/drawGraph.o
-OBJ		+=	src/drawLine.o
-OBJ		+=	src/drawDot.o
-OBJ		+=	src/zoomGraph.o
+OBJ		+=	src/graph_zoom.o
+OBJ		+=	src/graph_draw.o
+OBJ		+=	src/graph_drawLine.o
+OBJ		+=	src/graph_drawDot.o
 
 $(NAME)		:	$(OBJ)
 			$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)

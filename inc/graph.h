@@ -50,10 +50,10 @@ void		drawDot(Graph*, double x, double y, Uint32 col);
 void		drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col);
 
 /* Events */
-void		eventQuit(SDL_Event*);
-void		eventKeyDown(SDL_Event*);
-void		eventButtonDown(SDL_Event*);
-void		eventButtonUp(SDL_Event*);
-void		eventMouseMotion(SDL_Event*);
+void		graph_eventQuit(SDL_Event*);
+void		graph_eventKeyDown(SDL_Event*);
+void		graph_eventButtonDown(SDL_Event*);
+void		graph_eventButtonUp(SDL_Event*);
+void		graph_eventMouseMotion(SDL_Event*);
 
 #endif

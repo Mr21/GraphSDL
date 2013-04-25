@@ -12,10 +12,10 @@ LDFLAGS		+=	-lSDL_ttf
 
 OBJ		=	src/SDLazy.o
 OBJ		+=	src/main.o
+OBJ		+=	src/graph_events.o
 OBJ		+=	src/graph_convertUnity.o
 OBJ		+=	src/graph_drag.o
 OBJ		+=	src/initGraph.o
-OBJ		+=	src/eventsGraph.o
 OBJ		+=	src/drawGraph.o
 OBJ		+=	src/drawLine.o
 OBJ		+=	src/drawDot.o

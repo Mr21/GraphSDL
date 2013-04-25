@@ -1,12 +1,12 @@
 #include		"graph.h"
 
-void			eventQuit(SDL_Event* e)
+void			graph_eventQuit(SDL_Event* e)
 {
   (void)e;
   SDLazy_Quit(0);
 }
 
-void			eventKeyDown(SDL_Event* e)
+void			graph_eventKeyDown(SDL_Event* e)
 {
   switch (e->key.keysym.sym)
     {
@@ -15,7 +15,7 @@ void			eventKeyDown(SDL_Event* e)
     }
 }
 
-void			eventButtonDown(SDL_Event* e)
+void			graph_eventButtonDown(SDL_Event* e)
 {
   Graph*		g = SDLazy_GetData();
 
@@ -27,7 +27,7 @@ void			eventButtonDown(SDL_Event* e)
     }
 }
 
-void			eventButtonUp(SDL_Event* e)
+void			graph_eventButtonUp(SDL_Event* e)
 {
   Graph*		g = SDLazy_GetData();
 
@@ -35,7 +35,7 @@ void			eventButtonUp(SDL_Event* e)
     graph_dragOff(g);
 }
 
-void			eventMouseMotion(SDL_Event* e)
+void			graph_eventMouseMotion(SDL_Event* e)
 {
   Graph*		g = SDLazy_GetData();
 

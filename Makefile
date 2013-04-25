@@ -7,9 +7,8 @@ CFLAGS		+=	-Iinc/
 
 LDFLAGS		=	-lm
 LDFLAGS		+=	-lSDL
-LDFLAGS		+=	-lSDL_image-1.2
-#LDFLAGS		+=	-lSDL_ttf-2.0
-LDFLAGS		+=	/usr/lib64/libSDL_ttf-2.0.so.0.10.1
+LDFLAGS		+=	-lSDL_image
+LDFLAGS		+=	-lSDL_ttf
 
 OBJ		=	src/SDLazy.o
 OBJ		+=	src/main.o

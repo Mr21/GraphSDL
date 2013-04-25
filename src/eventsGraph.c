@@ -21,8 +21,8 @@ void			eventButtonDown(SDL_Event* e)
 
   switch (e->button.button)
     {
-    case SDL_BUTTON_WHEELDOWN:	zoomGraph(g, -1);	break;
-    case SDL_BUTTON_WHEELUP:	zoomGraph(g, 1);	break;
+    case SDL_BUTTON_WHEELDOWN:	graph_zoomOut(g);	break;
+    case SDL_BUTTON_WHEELUP:	graph_zoomIn(g);	break;
     case SDL_BUTTON_LEFT:	g->dragging = 1;	break;
     }
 }

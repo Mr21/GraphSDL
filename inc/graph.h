@@ -34,8 +34,9 @@ typedef		struct
 
 int		initGraph(Graph*, SDL_Surface*);
 void		drawGraph(void);
-void		zoomGraph(Graph*, int zoom);
 
+void		graph_zoomIn(Graph*);
+void		graph_zoomOut(Graph*);
 int		graph_XtoPixel(double x);
 int		graph_YtoPixel(double y);
 

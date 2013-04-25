@@ -23,7 +23,7 @@ void			eventButtonDown(SDL_Event* e)
     {
     case SDL_BUTTON_WHEELDOWN:	graph_zoomOut(g);	break;
     case SDL_BUTTON_WHEELUP:	graph_zoomIn(g);	break;
-    case SDL_BUTTON_LEFT:	g->dragging = 1;	break;
+    case SDL_BUTTON_LEFT:	graph_dragOn(g);	break;
     }
 }
 
@@ -32,14 +32,14 @@ void			eventButtonUp(SDL_Event* e)
   Graph*		g = SDLazy_GetData();
 
   if (e->button.button == SDL_BUTTON_LEFT)
-    g->dragging = 0;
+    graph_dragOff(g);
 }
 
 void			eventMouseMotion(SDL_Event* e)
 {
   Graph*		g = SDLazy_GetData();
 
-  if (g->dragging)
+  if (graph_isDragging(g))
     {
       g->ori[X] += (g->drag_smooth[X] = e->motion.xrel);
       g->ori[Y] += (g->drag_smooth[Y] = e->motion.yrel);

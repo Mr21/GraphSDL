@@ -37,6 +37,9 @@ void		drawGraph(void);
 
 void		graph_zoomIn(Graph*);
 void		graph_zoomOut(Graph*);
+void		graph_dragOn(Graph*);
+void		graph_dragOff(Graph*);
+int		graph_isDragging(Graph const*);
 int		graph_XtoPixel(double x);
 int		graph_YtoPixel(double y);
 

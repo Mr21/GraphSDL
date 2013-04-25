@@ -84,7 +84,7 @@ void			drawGraph(void)
       _draw_unit_line(g, i, (d -= g->unit[Y]), 0);
   drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
   drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
-  if (!g->dragging)
+  if (!graph_isDragging(g))
     {
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
       g->ori[Y] += (g->drag_smooth[Y] /= DRAG_SMOOTH_SPEED);

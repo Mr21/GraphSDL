@@ -24,8 +24,8 @@ static int		_pos_text(Graph *g, SDL_Surface *srf, char wh)
 static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
 {
   static SDL_Color	col = {192, 192, 192, 0};
-  char			s[32], ok = 0;
-  SDL_Surface		*srf;
+  char			s[64], ok = 0;
+  SDL_Surface*		srf;
   SDL_Rect		r;
 
   sprintf(s, "%+G", d);
@@ -56,20 +56,22 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
 static void		_drawMine(Graph* g)
 {
   graph_drawLine(g,
-		 3.14, 1.0,
-		 9.20, 3.0,
+		 -3.1415, -2.0,
+		 +3.1415, +2.0,
 		 0xff0000);
+  graph_drawLine(g,
+		 -2.00, 1.0,
+		 +3.00, 3.0,
+		 0x00ff00);
 }
 
-void			graph_draw(void)
+static void		_drawGrid(Graph* g)
 {
-  Graph*		g = SDLazy_GetData();
   double		x = fmod(g->ori[X], g->unit_dist[X]) - g->unit_dist[X];
   double		y = fmod(g->ori[Y], g->unit_dist[Y]) - g->unit_dist[Y];
   double		i, d;
   int			j;
 
-  SDL_FillRect(g->srf, NULL, 0);
   d = (x - g->ori[X]) / g->unit_dist[X] * g->unit[X];
   for (i = x, j = 1; (i += g->unit_dist[X] / SUB_DIV) < g->srf->w; ++j)
     if (j % SUB_DIV)
@@ -89,5 +91,40 @@ void			graph_draw(void)
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
       g->ori[Y] += (g->drag_smooth[Y] /= DRAG_SMOOTH_SPEED);
     }
+}
+
+void			_drawMouseCoord(Graph* g)
+{
+  static SDL_Color	col = {220, 220, 220, 0};
+  static SDL_Rect	r[2] = {{10, 10, 0, 0}, {0, 0, 0, 0}};
+  char			str[128];
+  SDL_Surface*		srf;
+
+  sprintf(str, "X : %+G", graph_XtoDouble(SDLazy_GetMouseX()));
+  if ((srf = TTF_RenderText_Solid(g->font, str, col)))
+    {
+      if (!r[1].y)
+	{
+	  r[1] = r[0];
+	  r[1].y += 1.5 * srf->h;
+	}
+      SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), r + 0);
+      SDL_FreeSurface(srf);
+    }
+  sprintf(str, "Y : %+G", graph_YtoDouble(SDLazy_GetMouseY()));
+  if ((srf = TTF_RenderText_Solid(g->font, str, col)))
+    {
+      SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), r + 1);
+      SDL_FreeSurface(srf);
+    }
+}
+
+void			graph_draw(void)
+{
+  Graph*		g = SDLazy_GetData();
+
+  SDL_FillRect(g->srf, NULL, 0);
+  _drawGrid(g);
   _drawMine(g);
+  _drawMouseCoord(g);
 }

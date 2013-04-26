@@ -6,6 +6,7 @@ int		main(void)
   Graph		graph;
 
   SDLazy_Init(860, 640, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE, "Graph2D");
+  SDLazy_SetFPSMax(500); /* tmp */
   if (graph_init(&graph, SDLazy_GetScreen()))
     return fprintf(stderr, "Graph init failed :(\n");
   SDLazy_AddEvent(SDL_QUIT, graph_eventQuit);

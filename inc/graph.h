@@ -46,6 +46,8 @@ int		graph_isDragging(Graph const*);
 /* Unity */
 int		graph_XtoPixel(double x);
 int		graph_YtoPixel(double y);
+double		graph_XtoDouble(int x);
+double		graph_YtoDouble(int y);
 
 /* Draw */
 void		graph_draw(void);

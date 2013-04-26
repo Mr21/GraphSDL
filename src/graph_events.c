@@ -41,8 +41,10 @@ void			graph_eventMouseMotion(SDL_Event* e)
 
   if (graph_isDragging(g))
     {
-      g->ori[X] += (g->drag_smooth[X] = e->motion.xrel);
-      g->ori[Y] += (g->drag_smooth[Y] = e->motion.yrel);
+      g->ori[X] += e->motion.xrel;
+      g->ori[Y] += e->motion.yrel;
+      g->drag_smooth[X] = abs(e->motion.xrel) > 2 ? e->motion.xrel : 0;
+      g->drag_smooth[Y] = abs(e->motion.yrel) > 2 ? e->motion.yrel : 0;
     }
   g->x = (e->motion.x - g->ori[X]) / g->unit_dist[X] * g->unit[X];
   g->y = (e->motion.y - g->ori[Y]) / g->unit_dist[Y] * -g->unit[Y];

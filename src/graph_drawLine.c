@@ -94,7 +94,7 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
     }
 }
 
-void			graph_drawLine(Graph *g, double x1, double y1, double x2, double y2, Uint32 col)
+void			graph_drawLine(Graph const* g, double x1, double y1, double x2, double y2, Uint32 col)
 {
   _line(graph_XtoPixel(x1), graph_YtoPixel(y1),
 	graph_XtoPixel(x2), graph_YtoPixel(y2),

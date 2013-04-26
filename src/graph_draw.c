@@ -4,7 +4,7 @@
 #define			SUB_DIV		6
 #define			MARGE		10
 
-static int		_posText(Graph *g, SDL_Surface *srf, char wh)
+static int		_posText(Graph const* g, SDL_Surface *srf, char wh)
 {
   if (wh == X)
     {
@@ -21,7 +21,7 @@ static int		_posText(Graph *g, SDL_Surface *srf, char wh)
   return g->ori[Y] + MARGE;
 }
 
-static void 		_drawUnit(Graph *g, int i, double d, char wh)
+static void 		_drawUnit(Graph const* g, int i, double d, char wh)
 {
   static SDL_Color	col = {192, 192, 192, 0};
   char			s[64], ok = 0;
@@ -56,13 +56,13 @@ static void 		_drawUnit(Graph *g, int i, double d, char wh)
     }
 }
 
-static void		_drawOrigins(Graph* g)
+static void		_drawOrigins(Graph const* g)
 {
   graph_drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
   graph_drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
 }
 
-static void		_drawGrid(Graph* g)
+static void		_drawGrid(Graph const* g)
 {
   double		x = fmod(g->ori[X], g->unit_dist[X]) - g->unit_dist[X];
   double		y = fmod(g->ori[Y], g->unit_dist[Y]) - g->unit_dist[Y];
@@ -83,7 +83,7 @@ static void		_drawGrid(Graph* g)
       _drawUnit(g, i, (d -= g->unit[Y]), 0);
 }
 
-void			_drawMouseCoord(Graph* g)
+void			_drawMouseCoord(Graph const* g)
 {
   static SDL_Color	col = {220, 220, 220, 0};
   static SDL_Rect	r[2] = {{10, 10, 0, 0}, {0, 0, 0, 0}};
@@ -109,7 +109,7 @@ void			_drawMouseCoord(Graph* g)
     }
 }
 
-static void		_drawMine(Graph* g)
+static void		_drawMine(Graph const* g)
 {
   graph_drawLine(g,
 		 -3.1415, -2.0,
@@ -123,7 +123,7 @@ static void		_drawMine(Graph* g)
 
 void			graph_draw(void)
 {
-  Graph*		g = SDLazy_GetData();
+  Graph const*		g = SDLazy_GetData();
 
   SDL_FillRect(g->srf, NULL, 0);
   _drawGrid(g);

@@ -54,10 +54,10 @@ void		graph_core(void);
 
 /* Draw */
 void		graph_draw(void);
-void		graph_drawDot(Graph*, double x, double y, Uint32 col);
+void		graph_drawDot(Graph const*, double x, double y, Uint32 col);
+void		graph_drawLine(Graph const*, double x1, double y1, double x2, double y2, Uint32 col);
 void		graph_drawLineW(SDL_Surface*, int x, Uint32 px, e_border);
 void		graph_drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
-void		graph_drawLine(Graph*, double x1, double y1, double x2, double y2, Uint32 col);
 
 /* Events */
 void		graph_eventQuit       (SDL_Event*);

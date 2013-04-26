@@ -6,7 +6,7 @@ int			graph_init(Graph* g, SDL_Surface* srf)
   if (TTF_Init() == -1)
     return fprintf(stderr, "TTF_Init failed: %s\n", TTF_GetError());
   memset(g, 0, sizeof(Graph));
-  if (!(g->font = TTF_OpenFont("font/square.ttf", 10)))
+  if (!(g->font = TTF_OpenFont("font/saxmono.ttf", 14)))
     return fprintf(stderr, "TTF_OpenFont failed: %s\n", TTF_GetError());
   g->srf = srf;
   g->ori[X] = srf->w / 2;

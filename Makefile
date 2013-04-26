@@ -16,7 +16,6 @@ OBJ		+=	src/graph_init.o
 OBJ		+=	src/graph_draw.o
 OBJ		+=	src/graph_core.o
 OBJ		+=	src/graph_calcScreenCoord.o
-OBJ		+=	src/graph_calcScreenDim.o
 OBJ		+=	src/graph_events.o
 OBJ		+=	src/graph_unity.o
 OBJ		+=	src/graph_drag.o

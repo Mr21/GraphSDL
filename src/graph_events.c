@@ -12,7 +12,6 @@ void			graph_eventResize(SDL_Event* e)
 
   (void)e;
   graph_calcScreenCoord(g);
-  graph_calcScreenDim(g);
 }
 
 void			graph_eventKeyDown(SDL_Event* e)

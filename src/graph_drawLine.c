@@ -51,8 +51,8 @@ static void		_calcDot(Graph const* g, double* x, double* y)
   *x = graph_XtoPixel(*x);
   *y = graph_YtoPixel(*y);
   /* Si le point est en dehors de l'ecran */
-  if (*x < g->scrCoord[X] || *x > g->scrCoord[X] + g->scrDim[W] ||
-      *y < g->scrCoord[Y] || *y > g->scrCoord[Y] + g->scrDim[H])
+  if (*x < g->scrCoordA[X] || *x > g->scrCoordB[X] ||
+      *y < g->scrCoordA[Y] || *y > g->scrCoordB[Y])
     {
       
     }

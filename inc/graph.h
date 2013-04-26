@@ -8,7 +8,6 @@
 # define	DRAG_SMOOTH_SPEED	1.07
 
 enum{X,Y};
-enum{W,H};
 
 typedef		enum
 {
@@ -22,7 +21,8 @@ typedef		struct
   Uint32	col[6];
   SDL_Surface*	srf;
   TTF_Font*	font;
-  double	scrCoord[2];
+  double	scrCoordA[2];
+  double	scrCoordB[2];
   double	scrDim[2];
   double	x, y;
   double	ori[2];

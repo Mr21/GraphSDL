@@ -23,6 +23,5 @@ int			graph_init(Graph* g, SDL_Surface* srf)
   g->col[4] = SDL_MapRGB(g->srf->format, 255, 100, 100);
   g->col[5] = SDL_MapRGB(g->srf->format, 100, 255, 100);
   graph_calcScreenCoord(g);
-  graph_calcScreenDim(g);
   return 0;
 }

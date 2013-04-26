@@ -60,7 +60,7 @@ static void		_calcDot(Graph const* g, double* x, double* y)
 
 void			graph_drawLine(Graph const* g, double x1, double y1, double x2, double y2, Uint32 col)
 {
-  _calcDot(&x1, &y1);
-  _calcDot(&x2, &y2);
+  _calcDot(g, &x1, &y1);
+  _calcDot(g, &x2, &y2);
   _line(x1, y1, x2, y2,	col, g->srf);
 }

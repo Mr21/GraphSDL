@@ -4,7 +4,7 @@
 #define			SUB_DIV		6
 #define			MARGE		10
 
-static int		_pos_text(Graph *g, SDL_Surface *srf, char wh)
+static int		_posText(Graph *g, SDL_Surface *srf, char wh)
 {
   if (wh == X)
     {
@@ -21,7 +21,7 @@ static int		_pos_text(Graph *g, SDL_Surface *srf, char wh)
   return g->ori[Y] + MARGE;
 }
 
-static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
+static void 		_drawUnit(Graph *g, int i, double d, char wh)
 {
   static SDL_Color	col = {192, 192, 192, 0};
   char			s[64], ok = 0;
@@ -31,44 +31,35 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
   sprintf(s, "%+G", d);
   if (!(srf = TTF_RenderText_Solid(g->font, s, col)))
     fprintf(stderr, "TTF_RenderText_Solid failed : %s\n", TTF_GetError());
-  if (!wh)
+  else
     {
-      if (i < g->ori[Y] - 5 || i > g->ori[Y] + 5)
+      if (!wh)
+	{
+	  if (i < g->ori[Y] - 5 || i > g->ori[Y] + 5)
+	    {
+	      ok = 1;
+	      graph_drawLineW(g->srf, i, g->col[1], DASHED);
+	      r.x = _posText(g, srf, wh);
+	      r.y = i - srf->h / 2;
+	    }
+	}
+      else if (i < g->ori[X] - 5 || i > g->ori[X] + 5)
 	{
 	  ok = 1;
-	  graph_drawLineW(g->srf, i, g->col[1], DASHED);
-	  r.x = _pos_text(g, srf, wh);
-	  r.y = i - srf->h / 2;
+	  graph_drawLineH(g->srf, i, g->col[1], DASHED);
+	  r.x = i - srf->w / 2;
+	  r.y = _posText(g, srf, wh);
 	}
+      if (ok)
+	SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), &r);
+      SDL_FreeSurface(srf);
     }
-  else if (i < g->ori[X] - 5 || i > g->ori[X] + 5)
-    {
-      ok = 1;
-      graph_drawLineH(g->srf, i, g->col[1], DASHED);
-      r.x = i - srf->w / 2;
-      r.y = _pos_text(g, srf, wh);
-    }
-  if (ok)
-    SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), &r);
-  SDL_FreeSurface(srf);
 }
 
 static void		_drawOrigins(Graph* g)
 {
   graph_drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
   graph_drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
-}
-
-static void		_drawMine(Graph* g)
-{
-  graph_drawLine(g,
-		 -3.1415, -2.0,
-		 +3.1415, +2.0,
-		 0xff0000);
-  graph_drawLine(g,
-		 -2.00, 1.0,
-		 +3.00, 3.0,
-		 0x00ff00);
 }
 
 static void		_drawGrid(Graph* g)
@@ -83,13 +74,13 @@ static void		_drawGrid(Graph* g)
     if (j % SUB_DIV)
       graph_drawLineH(g->srf, i, g->col[2], DOTTED);
     else
-      _draw_unit_line(g, i, (d += g->unit[X]), 1);
+      _drawUnit(g, i, (d += g->unit[X]), 1);
   d = (y - g->ori[Y]) / g->unit_dist[Y] * -g->unit[Y];
   for (i = y, j = 1; (i += g->unit_dist[Y] / SUB_DIV) < g->srf->h; ++j)
     if (j % SUB_DIV)
       graph_drawLineW(g->srf, i, g->col[2], DOTTED);
     else
-      _draw_unit_line(g, i, (d -= g->unit[Y]), 0);
+      _drawUnit(g, i, (d -= g->unit[Y]), 0);
   if (!graph_isDragging(g))
     {
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
@@ -121,6 +112,18 @@ void			_drawMouseCoord(Graph* g)
       SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), r + 1);
       SDL_FreeSurface(srf);
     }
+}
+
+static void		_drawMine(Graph* g)
+{
+  graph_drawLine(g,
+		 -3.1415, -2.0,
+		 +3.1415, +2.0,
+		 0xff0000);
+  graph_drawLine(g,
+		 -2.00, 1.0,
+		 +3.00, 3.0,
+		 0x00ff00);
 }
 
 void			graph_draw(void)

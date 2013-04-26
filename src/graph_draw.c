@@ -53,6 +53,12 @@ static void 		_draw_unit_line(Graph *g, int i, double d, char wh)
   SDL_FreeSurface(srf);
 }
 
+static void		_drawOrigins(Graph* g)
+{
+  graph_drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
+  graph_drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
+}
+
 static void		_drawMine(Graph* g)
 {
   graph_drawLine(g,
@@ -84,8 +90,6 @@ static void		_drawGrid(Graph* g)
       graph_drawLineW(g->srf, i, g->col[2], DOTTED);
     else
       _draw_unit_line(g, i, (d -= g->unit[Y]), 0);
-  graph_drawLineW(g->srf, g->ori[Y], g->col[0], SOLID);
-  graph_drawLineH(g->srf, g->ori[X], g->col[0], SOLID);
   if (!graph_isDragging(g))
     {
       g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
@@ -125,6 +129,7 @@ void			graph_draw(void)
 
   SDL_FillRect(g->srf, NULL, 0);
   _drawGrid(g);
+  _drawOrigins(g);
   _drawMine(g);
   _drawMouseCoord(g);
 }

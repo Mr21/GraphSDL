@@ -49,6 +49,9 @@ int		graph_YtoPixel(double y);
 double		graph_XtoDouble(int x);
 double		graph_YtoDouble(int y);
 
+/* Core */
+void		graph_core(void);
+
 /* Draw */
 void		graph_draw(void);
 void		graph_drawDot(Graph*, double x, double y, Uint32 col);

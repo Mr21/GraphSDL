@@ -81,11 +81,6 @@ static void		_drawGrid(Graph* g)
       graph_drawLineW(g->srf, i, g->col[2], DOTTED);
     else
       _drawUnit(g, i, (d -= g->unit[Y]), 0);
-  if (!graph_isDragging(g))
-    {
-      g->ori[X] += (g->drag_smooth[X] /= DRAG_SMOOTH_SPEED);
-      g->ori[Y] += (g->drag_smooth[Y] /= DRAG_SMOOTH_SPEED);
-    }
 }
 
 void			_drawMouseCoord(Graph* g)

@@ -6,5 +6,4 @@ void		graph_calcScreenCoord(Graph* g)
   g->scrCoordA[Y] = graph_YtoDouble(0);
   g->scrCoordB[X] = graph_XtoDouble(g->srf->w);
   g->scrCoordB[Y] = graph_YtoDouble(g->srf->h);
-  printf("%+9.2G %+9.2G %+9.2G %+9.2G\n", g->scrCoordA[X], g->scrCoordA[Y], g->scrCoordB[X], g->scrCoordB[Y]);
 }

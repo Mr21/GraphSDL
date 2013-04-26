@@ -19,8 +19,10 @@ OBJ		+=	src/graph_events.o
 OBJ		+=	src/graph_unity.o
 OBJ		+=	src/graph_drag.o
 OBJ		+=	src/graph_zoom.o
-OBJ		+=	src/graph_drawLine.o
 OBJ		+=	src/graph_drawDot.o
+OBJ		+=	src/graph_drawLine.o
+OBJ		+=	src/graph_drawLineW.o
+OBJ		+=	src/graph_drawLineH.o
 
 $(NAME)		:	$(OBJ)
 			$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)

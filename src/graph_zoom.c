@@ -30,6 +30,8 @@ static void			_calc_zoom(Graph *g, int zoom)
     g->ori[X] -= z * g->x / g->unit[X];
   if (_zoom(g, Y))
     g->ori[Y] += z * g->y / g->unit[Y];
+  graph_calcScreenCoord(g);
+  graph_calcScreenDim(g);
 }
 
 void				graph_zoomIn (Graph *g){_calc_zoom(g, +1);}

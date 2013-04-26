@@ -6,6 +6,15 @@ void			graph_eventQuit(SDL_Event* e)
   SDLazy_Quit(0);
 }
 
+void			graph_eventResize(SDL_Event* e)
+{
+  Graph*		g = SDLazy_GetData();
+
+  (void)e;
+  graph_calcScreenCoord(g);
+  graph_calcScreenDim(g);
+}
+
 void			graph_eventKeyDown(SDL_Event* e)
 {
   switch (e->key.keysym.sym)
@@ -45,7 +54,8 @@ void			graph_eventMouseMotion(SDL_Event* e)
       g->ori[Y] += e->motion.yrel;
       g->drag_smooth[X] = abs(e->motion.xrel) > 2 ? e->motion.xrel : 0;
       g->drag_smooth[Y] = abs(e->motion.yrel) > 2 ? e->motion.yrel : 0;
+      graph_calcScreenCoord(g);
     }
-  g->x = (e->motion.x - g->ori[X]) / g->unit_dist[X] * g->unit[X];
+  g->x = (e->motion.x - g->ori[X]) / g->unit_dist[X] * +g->unit[X];
   g->y = (e->motion.y - g->ori[Y]) / g->unit_dist[Y] * -g->unit[Y];
 }

@@ -7,7 +7,8 @@
 
 # define	DRAG_SMOOTH_SPEED	1.07
 
-enum{X,Y,W,H};
+enum{X,Y};
+enum{W,H};
 
 typedef		enum
 {
@@ -21,6 +22,8 @@ typedef		struct
   Uint32	col[6];
   SDL_Surface*	srf;
   TTF_Font*	font;
+  double	scrCoord[2];
+  double	scrDim[2];
   double	x, y;
   double	ori[2];
   double	unit[2];
@@ -30,6 +33,7 @@ typedef		struct
   double	drag_smooth[2];
 }		Graph;
 
+/* Init */
 int		graph_init(Graph*, SDL_Surface*);
 
 /* Zoom */
@@ -49,6 +53,8 @@ double		graph_YtoDouble(int y);
 
 /* Core */
 void		graph_core(void);
+void		graph_calcScreenCoord(Graph*);
+void		graph_calcScreenDim(Graph*);
 
 /* Draw */
 void		graph_draw(void);
@@ -59,6 +65,7 @@ void		graph_drawLineH(SDL_Surface*, int x, Uint32 px, e_border);
 
 /* Events */
 void		graph_eventQuit       (SDL_Event*);
+void		graph_eventResize     (SDL_Event*);
 void		graph_eventKeyDown    (SDL_Event*);
 void		graph_eventButtonDown (SDL_Event*);
 void		graph_eventButtonUp   (SDL_Event*);

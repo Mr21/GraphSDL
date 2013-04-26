@@ -5,16 +5,16 @@
 # include	<math.h>
 # include	"SDLazy/SDLazy.h"
 
-# define	DRAG_SMOOTH_SPEED	1.1
+# define	DRAG_SMOOTH_SPEED	1.07
 
-enum {X, Y};
+enum{X,Y,W,H};
 
-typedef enum
-  {
-    SOLID,
-    DASHED,
-    DOTTED
-  } e_border;
+typedef		enum
+{
+  SOLID,
+  DASHED,
+  DOTTED
+}		e_border;
 
 typedef		struct
 {
@@ -28,8 +28,6 @@ typedef		struct
   char		dragging;
   int		drag[2];
   double	drag_smooth[2];
-  int**		data;
-  int		nb_lines;
 }		Graph;
 
 int		graph_init(Graph*, SDL_Surface*);

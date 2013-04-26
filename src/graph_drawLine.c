@@ -46,9 +46,21 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
     }
 }
 
+static void		_calcDot(Graph const* g, double* x, double* y)
+{
+  *x = graph_XtoPixel(*x);
+  *y = graph_YtoPixel(*y);
+  /* Si le point est en dehors de l'ecran */
+  if (*x < g->scrCoord[X] || *x > g->scrCoord[X] + g->scrDim[W] ||
+      *y < g->scrCoord[Y] || *y > g->scrCoord[Y] + g->scrDim[H])
+    {
+      
+    }
+}
+
 void			graph_drawLine(Graph const* g, double x1, double y1, double x2, double y2, Uint32 col)
 {
-  _line(graph_XtoPixel(x1), graph_YtoPixel(y1),
-	graph_XtoPixel(x2), graph_YtoPixel(y2),
-	col, g->srf);
+  _calcDot(&x1, &y1);
+  _calcDot(&x2, &y2);
+  _line(x1, y1, x2, y2,	col, g->srf);
 }

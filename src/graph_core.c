@@ -10,4 +10,5 @@ void		graph_core(void)
       g->ori[Y] += (g->drag_smooth[Y] /= DRAG_SMOOTH_SPEED);
       graph_calcScreenCoord(g);
     }
+  g->userCore(g);
 }

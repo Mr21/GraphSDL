@@ -1,12 +1,29 @@
 #include	<stdio.h>
 #include	"graph.h"
 
+void		calcMyStuff(Graph* g)
+{
+  (void)g;
+}
+
+void		drawMyStuff(Graph const* g)
+{
+  graph_drawLine(g,
+                 -3.1415, -2.0,
+                 +3.1415, +2.0,
+                 0xff0000);
+  graph_drawLine(g,
+                 -2.00, 1.0,
+                 +3.00, 3.0,
+                 0x00ff00);
+}
+
 int		main(void)
 {
   Graph		graph;
 
   SDLazy_Init(860, 640, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE, "Graph2D");
-  if (graph_init(&graph, SDLazy_GetScreen()))
+  if (graph_init(&graph, calcMyStuff, drawMyStuff, NULL))
     return fprintf(stderr, "Graph init failed :(\n");
   /* Set events */
   SDLazy_AddEvent(SDL_QUIT,		graph_eventQuit);

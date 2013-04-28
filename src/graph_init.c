@@ -1,7 +1,7 @@
 #include		<string.h>
 #include		"graph.h"
 
-int			graph_init(Graph* g, SDL_Surface* srf)
+int			graph_init(Graph* g, void (*userCore)(Graph*), void (*userRender)(Graph const*), SDL_Surface* srf)
 {
   SDLazy_SetData(g);
   if (TTF_Init() == -1)
@@ -9,9 +9,11 @@ int			graph_init(Graph* g, SDL_Surface* srf)
   memset(g, 0, sizeof(Graph));
   if (!(g->font = TTF_OpenFont("font/saxmono.ttf", 14)))
     return fprintf(stderr, "TTF_OpenFont failed: %s\n", TTF_GetError());
-  g->srf = srf;
-  g->ori[X] = srf->w / 2;
-  g->ori[Y] = srf->h / 2;
+  g->userCore = userCore;
+  g->userRender = userRender;
+  g->srf = srf != NULL ? srf : SDLazy_GetScreen();
+  g->ori[X] = g->srf->w / 2;
+  g->ori[Y] = g->srf->h / 2;
   g->unit[X] = 1.0;
   g->unit[Y] = 1.0;
   g->unit_dist[X] = 150;

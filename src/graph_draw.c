@@ -109,18 +109,6 @@ void			_drawMouseCoord(Graph const* g)
     }
 }
 
-static void		_drawMine(Graph const* g)
-{
-  graph_drawLine(g,
-		 -3.1415, -2.0,
-		 +3.1415, +2.0,
-		 0xff0000);
-  graph_drawLine(g,
-		 -2.00, 1.0,
-		 +3.00, 3.0,
-		 0x00ff00);
-}
-
 void			graph_draw(void)
 {
   Graph const*		g = SDLazy_GetData();
@@ -128,6 +116,6 @@ void			graph_draw(void)
   SDL_FillRect(g->srf, NULL, 0);
   _drawGrid(g);
   _drawOrigins(g);
-  _drawMine(g);
+  g->userRender(g);
   _drawMouseCoord(g);
 }

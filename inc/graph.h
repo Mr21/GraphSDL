@@ -7,6 +7,8 @@
 
 # define	DRAG_SMOOTH_SPEED	1.07
 
+typedef	struct Graph Graph;
+
 enum{X,Y};
 
 typedef		enum
@@ -16,9 +18,11 @@ typedef		enum
   DOTTED
 }		e_border;
 
-typedef		struct
+struct		Graph
 {
   Uint32	col[6];
+  void		(*userCore)(Graph*);
+  void		(*userRender)(Graph const*);
   SDL_Surface*	srf;
   TTF_Font*	font;
   double	scrCoordA[2];
@@ -31,10 +35,10 @@ typedef		struct
   char		dragging;
   int		drag[2];
   double	drag_smooth[2];
-}		Graph;
+};
 
 /* Init */
-int		graph_init(Graph*, SDL_Surface*);
+int		graph_init(Graph*, void (*userCore)(Graph*), void (*userRender)(Graph const*), SDL_Surface*);
 
 /* Zoom */
 void		graph_zoomIn(Graph*);

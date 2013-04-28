@@ -7,7 +7,7 @@ static void		_case1(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf
   for (x = x1; x < x2; ++x)
     {
       y = y1 + ((y2 - y1) * (x - x1)) / (x2 - x1);
-      SDLazy_SetPix_Secure(srf, x, y, col);
+      SDLazy_SetPix(srf, x, y, col);
     }
 }
 
@@ -18,7 +18,7 @@ static void		_case2(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf
   for (y = y1; y < y2; ++y)
     {
       x = x1 + ((x2 - x1) * (y - y1)) / (y2 - y1);
-      SDLazy_SetPix_Secure(srf, x, y, col);
+      SDLazy_SetPix(srf, x, y, col);
     }
 }
 
@@ -40,7 +40,7 @@ static void		_line(int x1, int y1, int x2, int y2, Uint32 col, SDL_Surface* srf)
     }
 }
 
-static int		_seg2seg(double* A, double* B, double* C, double* D, double* Ix, double* Iy)
+static int		_seg2seg(double* A, double* B, double* C, double* D, double* ptInt)
 {
   double Ax = A[X];
   double Ay = A[Y];
@@ -85,38 +85,63 @@ static int		_seg2seg(double* A, double* B, double* C, double* D, double* Ix, dou
   if ((Sx < Ax && Sx < Bx) || (Sx > Ax && Sx > Bx) || (Sx < Cx && Sx < Dx) || (Sx > Cx && Sx > Dx) ||
       (Sy < Ay && Sy < By) || (Sy > Ay && Sy > By) || (Sy < Cy && Sy < Dy) || (Sy > Cy && Sy > Dy))
     return 0;
-  *Ix = Sx;
-  *Iy = Sy;
-  return 1;
-}
-
-static int		_calcDot(Graph const* g, double* x, double* y)
-{
-  /* Si le point est en dehors de l'ecran */
-  if (*x < g->scrCoordA[X] || *x > g->scrCoordB[X] ||
-      *y > g->scrCoordA[Y] || *y < g->scrCoordB[Y])
-    {
-      printf("%+8.2f | %+8.2f\n", *y, g->scrCoordA[Y]);
-      return 0;
-    }
-  *x = graph_XtoPixel(*x);
-  *y = graph_YtoPixel(*y);
+  ptInt[X] = Sx;
+  ptInt[Y] = Sy;
   return 1;
 }
 
 void			graph_drawLine(Graph const* g, double x1, double y1, double x2, double y2, Uint32 col)
 {
-  /*  double		a1[2], a2[2];
-  double		b1[2], b2[2];
+  double		b[4][2][2];
+  double		v[2][2];
+  double		newV[2][2];
+  int			i, j, aBorder = -1;
+  char			displayLine = 0;
 
-  a1[X] = x1;
-  a1[Y] = y1;
-  a2[X] = x2;
-  a2[Y] = y2;*/
+  v[0][X] = x1;
+  v[0][Y] = y1;
+  v[1][X] = x2;
+  v[1][Y] = y2;
 
-  /*if (_seg2seg(double* A, double* B, double* C, double* D, *x, *y))*/
+  newV[0][X] = x1;
+  newV[0][Y] = y1;
+  newV[1][X] = x2;
+  newV[1][Y] = y2;
 
-  _line(graph_XtoPixel(x1), graph_YtoPixel(y1),
-	graph_XtoPixel(x2), graph_YtoPixel(y2),
-	col, g->srf);
+  b[0][0][X] = g->scrCoordA[X];
+  b[0][0][Y] = g->scrCoordA[Y];
+  b[0][1][X] = g->scrCoordB[X];
+  b[0][1][Y] = g->scrCoordA[Y];
+
+  b[1][0][X] = g->scrCoordB[X];
+  b[1][0][Y] = g->scrCoordA[Y];
+  b[1][1][X] = g->scrCoordB[X];
+  b[1][1][Y] = g->scrCoordB[Y];
+
+  b[2][0][X] = g->scrCoordB[X];
+  b[2][0][Y] = g->scrCoordB[Y];
+  b[2][1][X] = g->scrCoordA[X];
+  b[2][1][Y] = g->scrCoordB[Y];
+
+  b[3][0][X] = g->scrCoordA[X];
+  b[3][0][Y] = g->scrCoordB[Y];
+  b[3][1][X] = g->scrCoordA[X];
+  b[3][1][Y] = g->scrCoordA[Y];
+
+  for (i = 0; i < 2; ++i)
+    if (v[i][X] > g->scrCoordA[X] && v[i][X] < g->scrCoordB[X] &&
+	v[i][Y] < g->scrCoordA[Y] && v[i][Y] > g->scrCoordB[Y])
+      displayLine = 1;
+    else
+      for (j = 0; j < 4; ++j)
+	if (j != aBorder && _seg2seg(v[0], v[1], b[j][0], b[j][1], newV[i]))
+	  {
+	    aBorder = j;
+	    break;
+	  }
+
+  if (displayLine || aBorder > -1)
+    _line(graph_XtoPixel(newV[0][X]), graph_YtoPixel(newV[0][Y]),
+	  graph_XtoPixel(newV[1][X]), graph_YtoPixel(newV[1][Y]),
+	  col, g->srf);
 }

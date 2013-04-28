@@ -51,7 +51,7 @@ static void 		_drawUnit(Graph const* g, int i, double d, char wh)
 	  r.y = _posText(g, srf, wh);
 	}
       if (ok)
-	SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), &r);
+	SDL_BlitSurface(srf, NULL, g->srf, &r);
       SDL_FreeSurface(srf);
     }
 }
@@ -98,13 +98,13 @@ void			_drawMouseCoord(Graph const* g)
 	  r[1] = r[0];
 	  r[1].y += 1.5 * srf->h;
 	}
-      SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), r + 0);
+      SDL_BlitSurface(srf, NULL, g->srf, r + 0);
       SDL_FreeSurface(srf);
     }
   sprintf(str, "Y : %+G", graph_YtoDouble(SDLazy_GetMouseY()));
   if ((srf = TTF_RenderText_Solid(g->font, str, col)))
     {
-      SDL_BlitSurface(srf, NULL, SDLazy_GetScreen(), r + 1);
+      SDL_BlitSurface(srf, NULL, g->srf, r + 1);
       SDL_FreeSurface(srf);
     }
 }

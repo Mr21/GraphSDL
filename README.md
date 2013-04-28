@@ -11,4 +11,18 @@ Du coup les droites changeront de taille et de position en fonction du zoom et d
 
 L'ensemble du projet est encore en cours de dév. du coup ce n'est pas encore très utilisable :S
 
+Pour pouvoir utiliser le projet il faut avoir (sous *Linux*)  
+
+    /usr/include/SDL/SDL.h
+    /usr/include/SDL/(ainsi que tous les autres .h de la SDL)
+    mais vérifiez aussi que vous avez bien :
+    /usr/include/SDL/SDL_image.h
+    /usr/include/SDL/SDL_ttf.h
+
+    /usr/lib/libSDL.so
+    /usr/lib/libSDL_image.so
+    /usr/lib/libSDL_ttf.so
+    mais peut etre aussi des raccourcis, notamment :
+    /usr/lib/libSDL_ttf-2.0.so.0 -> libSDL_ttf.so
+
 Merci <3  

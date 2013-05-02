@@ -1,5 +1,12 @@
 #include	"graph.h"
 
+int		graph_scalePixel(double w)
+{
+  Graph*	g = SDLazy_GetData();
+
+  return w * (g->unit_dist[X] / +g->unit[X]);
+}
+
 int		graph_XtoPixel(double x)
 {
   Graph*	g = SDLazy_GetData();

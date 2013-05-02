@@ -8,6 +8,10 @@ void		calcMyStuff(Graph* g)
 
 void		drawMyStuff(Graph const* g)
 {
+  graph_drawCircle(g,
+		   +0.5, +0.5,
+		   0.5,
+		   0x0000ff);
   graph_drawLine(g,
                  -3.1415, -2.0,
                  +3.1415, +2.0,

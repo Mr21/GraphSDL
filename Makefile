@@ -21,6 +21,7 @@ OBJ		+=	src/graph_unity.o
 OBJ		+=	src/graph_drag.o
 OBJ		+=	src/graph_zoom.o
 OBJ		+=	src/graph_drawDot.o
+OBJ		+=	src/graph_drawCircle.o
 OBJ		+=	src/graph_drawLine.o
 OBJ		+=	src/graph_drawLineW.o
 OBJ		+=	src/graph_drawLineH.o
